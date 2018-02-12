@@ -1,5 +1,6 @@
 import string
 
+# Extracts username & message from broadcaster's chat
 def getUserAndMsg(line):
     if line == "":
         print "\n\n\n\nEmpty string entered into getUserAndMsg()\n\n\n\n"
