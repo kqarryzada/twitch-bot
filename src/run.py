@@ -10,6 +10,9 @@ def pingCheck(line):
     if line == "PING :tmi.twitch.tv":
         print "Twitch sent ping request. Ready to pong"
         sendCommand("PONG :tmi.twitch.tv")
+        return true
+
+    return false
 
 if __name__ == "__main__":
     initial()
@@ -24,7 +27,9 @@ if __name__ == "__main__":
             print "\nNew line in strip_queue: ", line
 
             # Check to make sure twitch hasn't checked the bot is AFK
-            pingCheck(line)
+            pChk = pingCheck(line)
+            if pChk:
+                continue    # Line has been evaluated, move to next
 
             chatMsgHandler(line)
 else:

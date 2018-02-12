@@ -1,17 +1,28 @@
 import string
-# import pdb
+import pdb
 
 from cmdHandler import *
 from read import getUserAndMsg
 
-# THIS LIST MUST BE SORTED ALPHABETICALLY
-cmdList = ["!casual", "!cfg", "!config", "!commands", "!deserve", "!help", \
+cmdList = ["!casual", "!cfg",  "!commands", "!config", "!deserve", "!help", \
             "!hud", "!log", "!logs", "!uptime", "!viewmodels"]
 
+# Sanity check to prevent errors if an incorrect insertion occurs
+def chatInit():
+    cmdList.sort()  
+
 def chatMsgHandler(line):
-    user = ""
-    message = ""
-    user, message = getUserAndMsg(line)
+    # getUserAndMsg() returns a tuple. Will later have to convert to 
+    # individual strings.
+    user_tuple = ""
+    message_tuple = ""
+    user_tuple, message_tuple = getUserAndMsg(line)
+
+    # pdb.set_trace()
+
+    user = "".join(user_tuple)
+    message = "".join(message_tuple)
+    
     print user + " said: " + message
 
     # Command has been executed
@@ -19,7 +30,7 @@ def chatMsgHandler(line):
         stringSeg = message.split(None, 1)
         firstWord = stringSeg[0]
         ID = findCmdID(firstWord)
-        execCmd(ID, str(user), str(message))
+        execCmd(ID, user)
 
 
 # Performs binary search on cmd list and returns the associated index.
@@ -42,6 +53,8 @@ def findCmdID(string_):
     # This evaluates to: (rightBound + leftBound) / 2
     ptr = (rightBound + leftBound) / 2
 
+    # pdb.set_trace()
+
     while True:
         # Grab element
         testWord = cmdList[ptr]
@@ -59,8 +72,13 @@ def findCmdID(string_):
         if ptr == leftBound or ptr == rightBound:
             # This code runs when checking either extreme of the list
             leftCheck = (string_ == cmdList[leftBound])
+            if leftCheck:
+                ptr = leftBound
+                found = True
+
             rightCheck = (string_ == cmdList[rightBound])
-            if leftCheck or rightCheck:
+            if rightCheck:
+                ptr = rightBound
                 found = True
             break
 
@@ -73,22 +91,25 @@ def findCmdID(string_):
     else:
         return -1
 
-def execCmd(ID, user, message):
+def execCmd(ID, user):
     if ID < 0 or ID > (len(cmdList) - 1):
-        print "\n\n\nError: Invalid ID passed into execCmd()\n\n\n"
+        errStr = ("\n\n---------------------------------------\n"
+            "Error: Invalid ID passed into execCmd()\n"
+            "---------------------------------------\n\n")
+        print errStr
 
     if ID == 0:
         casual(user)
     elif ID == 1:
         config(user)
     elif ID == 2:
-        config(user)
+        commands(user, cmdList)
     elif ID == 3:
-        commands(user)
+        config(user)
     elif ID == 4:
         deserve(user)
     elif ID == 5:
-        commands(user)      # For now, "!help" just lists commands.
+        commands(user, cmdList)      # For now, "!help" just lists commands.
     elif ID == 6:
         hud(user)
     elif ID == 7:

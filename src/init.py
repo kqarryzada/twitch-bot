@@ -1,7 +1,9 @@
 import string
 from mySocket import *
+from chat import chatInit
 
 def initial():
+    chatInit()
     openSocket()
     joinRoom()
 
