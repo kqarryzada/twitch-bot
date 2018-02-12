@@ -1,8 +1,12 @@
 import string
+# import pdb
+
+from cmdHandler import *
 from read import getUserAndMsg
 
 # THIS LIST MUST BE SORTED ALPHABETICALLY
-cmdList = ["cfg", "config", "commands", "help", "uptime"]
+cmdList = ["!casual", "!cfg", "!config", "!commands", "!deserve", "!help", \
+            "!hud", "!log", "!logs", "!uptime", "!viewmodels"]
 
 def chatMsgHandler(line):
     user = ""
@@ -12,10 +16,11 @@ def chatMsgHandler(line):
 
     # Command has been executed
     if message[0] == '!':
-        # execCmd(user, message)
+        stringSeg = message.split(None, 1)
+        firstWord = stringSeg[0]
+        ID = findCmdID(firstWord)
+        execCmd(ID, str(user), str(message))
 
-
-#def execCmd(user, message):
 
 # Performs binary search on cmd list and returns the associated index.
 # Returns -1 upon failure
@@ -55,7 +60,8 @@ def findCmdID(string_):
             # This code runs when checking either extreme of the list
             leftCheck = (string_ == cmdList[leftBound])
             rightCheck = (string_ == cmdList[rightBound])
-            found = leftCheck or rightCheck
+            if leftCheck or rightCheck:
+                found = True
             break
 
     # Check upon exiting loop in case word is at either extreme of the list
@@ -66,3 +72,31 @@ def findCmdID(string_):
         return ptr
     else:
         return -1
+
+def execCmd(ID, user, message):
+    if ID < 0 or ID > (len(cmdList) - 1):
+        print "\n\n\nError: Invalid ID passed into execCmd()\n\n\n"
+
+    if ID == 0:
+        casual(user)
+    elif ID == 1:
+        config(user)
+    elif ID == 2:
+        config(user)
+    elif ID == 3:
+        commands(user)
+    elif ID == 4:
+        deserve(user)
+    elif ID == 5:
+        commands(user)      # For now, "!help" just lists commands.
+    elif ID == 6:
+        hud(user)
+    elif ID == 7:
+        logs(user)
+    elif ID == 8:
+        logs(user)
+    elif ID == 9:
+        uptime(user)
+    elif ID == 10:
+        viewmodels(user)
+    

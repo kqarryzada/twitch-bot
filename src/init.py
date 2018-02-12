@@ -1,14 +1,16 @@
 import string
-from mySocket import sendMessage
+from mySocket import *
 
+def initial():
+    openSocket()
+    joinRoom()
 
-# Performs initial actions for connecting to chat
-def joinRoom(s):
+# Performs chat initialization
+def joinRoom():
     buffer = ""
     Loading = True
     while Loading:
-        # s is a socket
-        buffer = buffer + s.recv(1024)
+        buffer = updateBuffer(buffer)
         strip_queue = string.split(buffer, "\n")
         buffer = strip_queue.pop()
 
@@ -16,7 +18,7 @@ def joinRoom(s):
             print(line)
             Loading = loadingComplete(line)
 
-    sendMessage(s, "Successfully joined chat.")
+    sendMessage("Successfully joined chat.")
 
 
 # Checks for end of string message
