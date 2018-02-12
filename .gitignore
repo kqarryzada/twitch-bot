@@ -101,4 +101,4 @@ ENV/
 .mypy_cache/
 
 # Prevent saving my own settings/passwords to repository
-./mysettings/
+mysettings/
