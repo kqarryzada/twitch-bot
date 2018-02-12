@@ -102,3 +102,4 @@ ENV/
 
 # Prevent saving my own settings/passwords to repository
 mysettings/
+src/settings.py
