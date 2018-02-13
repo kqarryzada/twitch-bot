@@ -1,18 +1,20 @@
+import pdb
 import string
 
 # Project files
 import settings
-from mySocket import updateBuffer
+from mySocket import updateBuffer, sendCommand
 from init import initial
 from chat import chatMsgHandler
 
 def pingCheck(line):
-    if line == "PING :tmi.twitch.tv":
+    # pdb.set_trace()
+    if line == "PING :tmi.twitch.tv\r":
         print "Twitch sent ping request. Ready to pong"
         sendCommand("PONG :tmi.twitch.tv")
-        return true
+        return True
 
-    return false
+    return False
 
 if __name__ == "__main__":
     initial()

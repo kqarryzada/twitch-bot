@@ -2,17 +2,18 @@ import pdb
 import string
 from mySocket import sendMessage
 def casual(user):
-    retMsg = "@" + user +  \
-        " http://i0.kym-cdn.com/photos/images/original/000/625/834/a48.png"
+    # pdb.set_trace()
+    retMsg = user + \
+        "  http://i0.kym-cdn.com/photos/images/original/000/625/834/a48.png"
     sendMessage(retMsg)
 
 def config(user):
-    retMsg = "@" + user + \
+    retMsg = user + \
         " cfg will be added soon!"
     sendMessage(retMsg)
 
 def commands(user, cmdList):
-    retMsg = "@" + user + \
+    retMsg = user + \
         " List of commands: "
 
     lastIndex = len(cmdList) - 1
@@ -25,28 +26,28 @@ def commands(user, cmdList):
     sendMessage(retMsg)
 
 def deserve(user):
-    retMsg = "@" + user + \
+    retMsg = user + \
         " https://pbs.twimg.com/media/CZcrKQ6WEAQarVy.jpg"
     sendMessage(retMsg)
 
 
 def hud(user):
-    retMsg = "@" + user + \
+    retMsg = user + \
         " I use BudHud. Download it here: https://github.com/rbjaxter/budhud/"
     sendMessage(retMsg)
 
 def logs(user):
-    #  retMsg = "@" + user +    
+    #  retMsg = user +    
     retMsg = "Logs not implemented yet"
     sendMessage(retMsg)
 
 def uptime(user):
-    #  retMsg = "@" + user +    
+    #  retMsg = user +    
     retMsg = "Uptime not implemented yet"
     sendMessage(retMsg)
 
 def viewmodels(user):
-    retMsg = "@" + user + \
+    retMsg = user + \
         (" I use Yttrium's viewmodels, which allows you to hide certain "
         "items and show others. Installation tutorial here: "
         "https://youtu.be/4phrSBGD1qA")

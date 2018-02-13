@@ -21,6 +21,7 @@ def chatMsgHandler(line):
     # pdb.set_trace()
 
     user = "".join(user_tuple)
+    user = "@" + user
     message = "".join(message_tuple)
     
     print user + " said: " + message
@@ -28,8 +29,20 @@ def chatMsgHandler(line):
     # Command has been executed
     if message[0] == '!':
         stringSeg = message.split(None, 1)
-        firstWord = stringSeg[0]
+        firstWord = stringSeg[0].lower()        #Make typing commands case-insensitive
         ID = findCmdID(firstWord)
+
+        # If user types something like "!hud @OtherTwitchUser", we should
+        # tag OtherTwitchUser instead of the one who typed the command.
+        # But first, check stringSeg[1] exists.
+        if len(stringSeg) > 1:      
+            if stringSeg[1][0] == '@':
+                # Extract username and tag them instead
+                newUser = stringSeg[1].split(None, 1)
+                user = newUser[0]
+                # print "New user tagged: " + user
+        
+        # pdb.set_trace()        
         execCmd(ID, user)
 
 
