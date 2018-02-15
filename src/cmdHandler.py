@@ -1,8 +1,8 @@
-import pdb
+import requests
 import string
 from mySocket import sendMessage
+
 def casual(user):
-    # pdb.set_trace()
     retMsg = user + \
         "  http://i0.kym-cdn.com/photos/images/original/000/625/834/a48.png"
     sendMessage(retMsg)
@@ -30,25 +30,17 @@ def deserve(user):
         " https://pbs.twimg.com/media/CZcrKQ6WEAQarVy.jpg"
     sendMessage(retMsg)
 
-
 def hud(user):
     retMsg = user + \
         " I use BudHud. Download it here: https://github.com/rbjaxter/budhud/"
     sendMessage(retMsg)
 
-def logs(user):
-    #  retMsg = user +    
-    retMsg = "Logs not implemented yet"
-    sendMessage(retMsg)
+def source(user):
+    retMsg = user + (" The source code for this bot is located at: "
+        "https://github.com/kqarryzada/twitch-bot")
 
 def uptime(user):
-    #  retMsg = user +    
+    # retMsg = user
     retMsg = "Uptime not implemented yet"
-    sendMessage(retMsg)
 
-def viewmodels(user):
-    retMsg = user + \
-        (" I use Yttrium's viewmodels, which allows you to hide certain "
-        "items and show others. Installation tutorial here: "
-        "https://youtu.be/4phrSBGD1qA")
     sendMessage(retMsg)

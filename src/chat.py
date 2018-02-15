@@ -1,24 +1,21 @@
 import string
-import pdb
 
 from cmdHandler import *
 from read import getUserAndMsg
 
 cmdList = ["!casual", "!cfg",  "!commands", "!config", "!deserve", "!help", \
-            "!hud", "!log", "!logs", "!uptime", "!viewmodels"]
+            "!hud", "!sourcecode", "!uptime"]
 
 # Sanity check to prevent errors if an incorrect insertion occurs
 def chatInit():
     cmdList.sort()  
 
 def chatMsgHandler(line):
-    # getUserAndMsg() returns a tuple. Will later have to convert to 
+    # getUserAndMsg() returns a tuple. Will have to convert to 
     # individual strings.
     user_tuple = ""
     message_tuple = ""
     user_tuple, message_tuple = getUserAndMsg(line)
-
-    # pdb.set_trace()
 
     user = "".join(user_tuple)
     user = "@" + user
@@ -29,7 +26,9 @@ def chatMsgHandler(line):
     # Command has been executed
     if message[0] == '!':
         stringSeg = message.split(None, 1)
-        firstWord = stringSeg[0].lower()        #Make typing commands case-insensitive
+
+        # Make typing commands case-insensitive
+        firstWord = stringSeg[0].lower()
         ID = findCmdID(firstWord)
 
         # If user types something like "!hud @OtherTwitchUser", we should
@@ -40,9 +39,7 @@ def chatMsgHandler(line):
                 # Extract username and tag them instead
                 newUser = stringSeg[1].split(None, 1)
                 user = newUser[0]
-                # print "New user tagged: " + user
         
-        # pdb.set_trace()        
         execCmd(ID, user)
 
 
@@ -65,8 +62,6 @@ def findCmdID(string_):
     #
     # This evaluates to: (rightBound + leftBound) / 2
     ptr = (rightBound + leftBound) / 2
-
-    # pdb.set_trace()
 
     while True:
         # Grab element
@@ -126,11 +121,6 @@ def execCmd(ID, user):
     elif ID == 6:
         hud(user)
     elif ID == 7:
-        logs(user)
+        source(user)
     elif ID == 8:
-        logs(user)
-    elif ID == 9:
         uptime(user)
-    elif ID == 10:
-        viewmodels(user)
-    
