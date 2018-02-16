@@ -1,7 +1,6 @@
 import socket
 from settings import HOST, PORT, PASS, LOGIN_ID, CHANNEL_ID
 
-
 # Opens initial connection to twitch channel with necessary credentials
 def openSocket():
     global SOCKET_

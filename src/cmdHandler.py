@@ -1,4 +1,4 @@
-import requests
+# import requests
 import string
 from mySocket import sendMessage
 
@@ -8,13 +8,11 @@ def casual(user):
     sendMessage(retMsg)
 
 def config(user):
-    retMsg = user + \
-        " cfg will be added soon!"
+    retMsg = user + " cfg will be added soon!"
     sendMessage(retMsg)
 
 def commands(user, cmdList):
-    retMsg = user + \
-        " List of commands: "
+    retMsg = user + " List of commands: "
 
     lastIndex = len(cmdList) - 1
     for strIndex in range(len(cmdList)):

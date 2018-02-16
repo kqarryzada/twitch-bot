@@ -1,6 +1,7 @@
 import string
 
 from cmdHandler import *
+from jsonRequests import getJSON
 from read import getUserAndMsg
 
 cmdList = ["!casual", "!cfg",  "!commands", "!config", "!deserve", "!help", \
@@ -22,6 +23,11 @@ def chatMsgHandler(line):
     message = "".join(message_tuple)
     
     print user + " said: " + message
+
+    if message == "!check":
+        response = getJSON()
+        print response
+        return
 
     # Command has been executed
     if message[0] == '!':
